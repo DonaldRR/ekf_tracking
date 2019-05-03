@@ -7,9 +7,9 @@ In this project, I will estimate the moving object locations based on noisy lida
 
 This code should run under C++ 11.
 
-#### Simulator**
+#### Simulator
 
-This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases
+This project involves the Term 2 Simulator which can be downloaded [here](https://github.com/udacity/self-driving-car-sim/releases).
 
 #### Setting up
 
@@ -39,3 +39,6 @@ Once the install for uWebSocketIO is complete, the main program can be built and
 3. Compile: `cmake .. && make` 
    * On windows, you may need to run: `cmake .. -G "Unix Makefiles" && make`
 4. Run it: `./ExtendedKF `
+
+#### Running result
+
