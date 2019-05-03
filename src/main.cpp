@@ -9,6 +9,8 @@ using Eigen::MatrixXd;
 using Eigen::VectorXd;
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
 // for convenience
 using json = nlohmann::json;
@@ -39,6 +41,8 @@ int main() {
   Tools tools;
   vector<VectorXd> estimations;
   vector<VectorXd> ground_truth;
+    
+    
 
   h.onMessage([&fusionEKF,&tools,&estimations,&ground_truth]
               (uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length, 
@@ -48,7 +52,7 @@ int main() {
     // The 2 signifies a websocket event
     if (length && length > 2 && data[0] == '4' && data[1] == '2') {
       auto s = hasData(string(data));
-
+        
       if (s != "") {
         auto j = json::parse(s);
 
@@ -106,10 +110,10 @@ int main() {
           gt_values(2) = vx_gt;
           gt_values(3) = vy_gt;
           ground_truth.push_back(gt_values);
-          
           // Call ProcessMeasurement(meas_package) for Kalman filter
-          fusionEKF.ProcessMeasurement(meas_package);       
+          fusionEKF.ProcessMeasurement(meas_package);
 
+            cout << "gt=" << endl << x_gt << endl << y_gt << endl << vx_gt << endl << vy_gt << endl;
           // Push the current estimated x,y positon from the Kalman filter's 
           //   state vector
 
@@ -124,11 +128,9 @@ int main() {
           estimate(1) = p_y;
           estimate(2) = v1;
           estimate(3) = v2;
-        
+            
           estimations.push_back(estimate);
-
           VectorXd RMSE = tools.CalculateRMSE(estimations, ground_truth);
-
           json msgJson;
           msgJson["estimate_x"] = p_x;
           msgJson["estimate_y"] = p_y;
@@ -139,7 +141,6 @@ int main() {
           auto msg = "42[\"estimate_marker\"," + msgJson.dump() + "]";
           // std::cout << msg << std::endl;
           ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
-
         }  // end "telemetry" if
 
       } else {
