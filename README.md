@@ -42,4 +42,6 @@ Once the install for uWebSocketIO is complete, the main program can be built and
 
 #### Running result
 
+The running result of `dataset1`  is shown below. The RMSE is `[0.0987, 0.0833, 0.4188, 0.4707]` which is within the required rmse `[.11, .11, .52 .52]`.
+
 <img src="/screen_shots/dataset1.png" width="40%">
