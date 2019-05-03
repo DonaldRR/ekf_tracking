@@ -63,6 +63,16 @@ class KalmanFilter {
 
   // measurement covariance matrix
   Eigen::MatrixXd R_;
+
+private:
+    // Time steps
+    int time_step=0;
+    
+    // Large steps
+    int thresh_step = 10;
+    
+    // Gain factor
+    float gain_factor=1.5;
 };
 
 #endif // KALMAN_FILTER_H_
